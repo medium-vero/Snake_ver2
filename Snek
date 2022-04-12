@@ -319,7 +319,7 @@ void menu(){
 	}
 	
 }
-void main(){
+int main(){
 	state = MENU;
     menu();
 while(1){
