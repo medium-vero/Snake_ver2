@@ -7,11 +7,13 @@ int toa_doy[100] = { 0 };
 int sl = 1;
 int xqua = -1;
 int yqua = -1;
-int speed=100;
-int score=1; //tinh diem
+int speed = 50;
+int score = 0; //tinh diem
 int snakecolor=1;  // xu li phan doi mau lien tuc cho con ran khi an qua
-int luachoncu,luachonmoi; // xu li phan menu
 int dem=0;
+enum state{
+	MENU = 0, INGAME, SETTING, GUIDING, INFORMATION
+} state;
 void gotoXY(int x, int y){   // ham di chuyen den toa do (x,y) tren man hinh
   static HANDLE h = NULL;  
   if(!h)
@@ -174,91 +176,192 @@ void vaogame(){
 		gotoXY(100,2);
 		printf("SCORE : %d",score);
 		if (game_over()){
-			gotoXY(48,12);
+			gotoXY(45,12);
 			SetColor(13);
 			printf("YOUR SCORE : %d   \n",score);
-			break;
+            gotoXY(30,13);
+            SetColor(13);
+            printf("Nhan nut bat ki de quay lain man hinh chinh")
+			getchar();
+            state = MENU;
+            break;
 		}
 		xu_ly_ran_an_qua();
 		di_chuyen_ran(x,y);
-		Sleep(speed); // toc do
+		Sleep(speed*2); // toc do
 	}
 	gotoXY(28,13);
 	SetColor(4);
 }
-void menu(int luachoncu, int luachonmoi){
-	while(1){
-		if(dem!=0){
-			SetColor(7);
-		}
-		system("cls");
-		Nocursortype(); // ham an con tro chuot tren man hinh console
-		gotoXY(52,1);
-		printf("SNAKE GAME");             
-		gotoXY(53,4);
-		printf("1.PLAY");
-		gotoXY(53,5);
-		printf("2.HELP");
-		gotoXY(53,6);
-		printf("3.SETTING");
-		gotoXY(53,8);
-		printf("CHOICE : ");
-		while(1){
-			scanf("%d",&luachoncu);
-			switch(luachoncu){ 
-				case 1: // vao game
-					system("cls");
-					vaogame();
-					gotoXY(40,14);
-					printf("Press 3 and ENTER to return to the menu : ");
-					scanf("%d",&luachonmoi);
-					dem++;
-					break;
-				case 2: //huong dan
-					system("cls");
-					gotoXY(50,4);
-					printf("Use arrow keys to move");
-					gotoXY(50,5);
-					printf("When the snake hits the wall, you lose");
-					gotoXY(50,6);
-					printf("Press 3 and ENTER to return to the menu");
-					gotoXY(50,8);
-					printf("CHOICE : ");
-					scanf("%d",&luachonmoi);
-					break;
-				case 3: //cai dat toc do
-						while(1){	
-							system("cls");
-							gotoXY(50,4);
-							printf("The snake is moving at a speed of %d",speed);
-							gotoXY(50,5);
-							printf("Press 1 to increase the snake's speed by 10 ");
-							gotoXY(50,6);
-							printf("Press 2 to decrease the snake's speed by 10 ");
-							gotoXY(50,7);
-							printf("Press 3 and ENTER to return to the menu");
-							gotoXY(50,9);
-							printf("CHOICE : ");
-							scanf("%d",&luachonmoi);
-							if(luachonmoi==1){
-								speed=speed-10;
-							}	
-							if(luachonmoi==2){
-								speed=speed+10;
-							}
-							if(luachonmoi==3)
-								break;
-						}	
-							break;
-			}
-			if(luachonmoi==3){
-				break;
-				SetColor(7);
-				menu(luachoncu,luachonmoi);
-			}
-		}
-	}
+void information(){
+	system("cls");
+	SetColor(4);
+	gotoXY(55,3);
+	printf("SNEK");
+		gotoXY(48,5);
+		printf("Use arrow keys to move");
+		gotoXY(40,6);
+		printf("When the snake hits the wall, you lose");
+		gotoXY(40,7);
+		SetColor(14);
+		printf("Press any button to return to the menu");
+		getchar();
+		state = MENU;
 }
+void setting(){
+  system("cls");
+  gotoXY(30,9);
+  printf("Nhan LEFT ARROW KEY de tang toc, RIGHT ARROW KEY de giam toc");
+  gotoXY(50,11);
+  printf("toc do hien tai : %d",speed);
+  gotoXY(40,13);
+  printf("Press any button to return to the menu");
+  int key;
+  while(state==SETTING){
+  	if(kbhit()){
+  		key = getch();
+  		switch (key){
+  			//nut trai
+  			case 75 :
+  				if(speed>1){
+				  
+  				speed -=1;
+  				gotoXY(50,11);
+                printf("toc do hien tai : %d   ",speed);
+                }
+  				break;
+  				//nut phai
+  				case  77 :
+  					if(speed<100){
+					  
+  					speed+=1;
+  					gotoXY(50,11);
+                    printf("toc do hien tai : %d   ",speed);
+                    }
+  					break;
+  					case 13 :
+  						state = MENU;
+  						break;
+		  }
+	  }
+  }	
+}
+void menu(){
+	SetColor(14);
+	system("cls");
+    gotoXY(55,3);
+	printf("SNEK");
+	gotoXY(50,5);
+	SetColor(4);
+	printf("1. vao game");
+	gotoXY(50,6);
+	printf("2. tuy chinh");
+	gotoXY(50,7);
+	printf("3. thong tin");
+	int luachonmoi = 1;
+	int luachoncu = 1;
+	int next = 1;
+	int key;
+	SetColor(14);
+	gotoXY(49,5);
+				printf("%c",16);
+	while(state==MENU){
+		if(kbhit()){
+			key = getch();
+			if(key==80) {
+			luachonmoi++;
+			if(luachonmoi ==4) luachonmoi = 1;
+			}
+			if(key==72) {
+			luachonmoi --;
+			if(luachonmoi == 0) luachonmoi = 3;
+			}
+		switch (luachonmoi) {
+			case 1 :
+				if(luachoncu!=luachonmoi){
+				
+				gotoXY(49,6);
+				printf(" ");
+				gotoXY(49,7);
+				printf(" ");
+				luachoncu = 1;
+				
+				gotoXY(49,5);
+				SetColor(14);
+				printf("%c",16);
+				}
+				break;
+			case 2 :
+				if(luachoncu!=luachonmoi){
+			
+				gotoXY(49,5);
+				printf(" ");
+				gotoXY(49,7);
+				printf(" ");
+		        gotoXY(49,6);
+		        SetColor(14);
+				printf("%c",16);
+				luachoncu = 2;
+				}
+				break;
+			case 3 :
+				if(luachoncu!=luachonmoi){
+				
+				
+				gotoXY(49,6);
+				printf(" ");
+				gotoXY(49,5);
+				printf(" ");
+				gotoXY(49,7);
+				SetColor(14);
+				printf("%c",16);
+				
+				luachoncu = 3;
+				}
+				break;
+		}
+		if(key==13){
+		switch (luachonmoi){
+		case 1:			
+			state = INGAME;
+			break;
+			case 2:
+				state = SETTING;
+				break;
+			case 3 :
+				state = INFORMATION;
+				break;
+				
+		}
+		}
+		
+	}
+	
+	}
+	
+}
+
+
 int main(){
-		menu(luachoncu,luachonmoi);
+	state = MENU;
+    menu();
+while(1){
+	switch (state){
+		case MENU : 
+		menu();
+		break;
+		case INGAME :
+        system("cls");
+			vaogame();
+			break;
+		case INFORMATION :
+			information();
+			break;
+			case  SETTING:
+				setting();
+				break;
+	}
+	
+}
+
 }
