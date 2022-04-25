@@ -5,8 +5,8 @@
 int toa_dox[100] = { 0 };
 int toa_doy[100] = { 0 };
 int sl = 3;
-int xqua = -1;
-int yqua = -1;
+int xqua; 
+int yqua;
 int speed=100;
 int score=0; //tinh diem
 int highest_record_score=0;
@@ -60,39 +60,95 @@ void man2(){
 	for (int x = 30;x <=40;x++){
 		gotoXY(x, 5);
 		printf("+");
+		gotoXY(x, 20);
+		printf("+");
 	} 
 	for (int y = 5;y <=10;y++){
 		gotoXY(30, y);
+		printf("+");
+		gotoXY(80, y);
 		printf("+");
 	}
 	for (int x = 70;x <=80;x++){
 		gotoXY(x, 5);
 		printf("+");
-	} 
-	for (int y = 5;y <=10;y++){
-		gotoXY(80, y);
-		printf("+");
-	}
-	for (int x = 30;x <=40;x++){
 		gotoXY(x, 20);
 		printf("+");
 	} 
 	for (int y = 15;y <=20;y++){
 		gotoXY(30, y);
 		printf("+");
-	}
-	for (int x = 70;x <=80;x++){
-		gotoXY(x, 20);
-		printf("+");
-	} 
-	for (int y = 15;y <=20;y++){
 		gotoXY(80, y);
 		printf("+");
 	}
 	
 }
+void man3(){
+	for (int x = 10;x <95;x++){
+		gotoXY(x, 1);
+		printf("+"); 
+		gotoXY(x, 25);
+		printf("+"); 
+	}
+	for (int y = 1;y <= 25;y++){
+		gotoXY(10, y);
+		printf("+"); 
+		gotoXY(95, y);
+		printf("+"); 
+	}
+	for (int x = 20;x <=85;x++){
+		gotoXY(x, 5);
+		printf("+"); 
+		gotoXY(x, 20);
+		printf("+"); 
+	}
+	for (int y = 3;y <= 7;y++){
+		gotoXY(20, y);
+		printf("+"); 
+		gotoXY(85, y);
+		printf("+"); 
+	}
+   for (int y = 18;y <= 22;y++){
+		gotoXY(20, y);
+		printf("+"); 
+		gotoXY(85, y);
+		printf("+"); 
+	}
+   	for (int x = 40;x <=65;x++){
+	   	gotoXY(x, 7);
+		printf("+"); 
+		gotoXY(x, 18);
+		printf("+"); 
+    }
+    for (int y = 7;y <= 11;y++){
+		gotoXY(40, y);
+		printf("+"); 
+		gotoXY(65, y);
+		printf("+"); 
+	}
+    for (int y = 14;y <= 18;y++){
+		gotoXY(40, y);
+		printf("+"); 
+		gotoXY(65, y);
+		printf("+"); 
+	}
+	for (int y = 9;y <= 16;y++){
+		gotoXY(53, y);
+		printf("+");
+    }
+}
+
+
 void khoi_tao_ran(){
 	int x_khoi_tao = 50;
+	int y_khoi_tao = 13;
+	for (int i = 0;i < sl;i++){
+		toa_dox[i] = x_khoi_tao--;
+		toa_doy[i] = y_khoi_tao;
+	}
+}
+void khoi_tao_ran1(){
+	int x_khoi_tao = 20;
 	int y_khoi_tao = 13;
 	for (int i = 0;i < sl;i++){
 		toa_dox[i] = x_khoi_tao--;
@@ -143,6 +199,19 @@ bool game_over2(){
 	}
 	return kt_ran_cham_than();
 }
+bool game_over3(){
+	if ((toa_dox[0] == 10 || toa_dox[0] == 95 ||toa_doy[0] == 1||toa_doy[0] == 25)
+	||(toa_dox[0] >= 20 & toa_dox[0] <= 85 & toa_doy[0] == 5)  ||(toa_dox[0] >= 20 & toa_dox[0] <= 85 & toa_doy[0] == 20 )
+	||(toa_dox[0] == 20 & toa_doy[0] >= 3  & toa_doy[0] <= 7 ) ||(toa_dox[0] == 85 & toa_doy[0] >= 3  & toa_doy[0] <= 7  )
+	||(toa_dox[0] == 20 & toa_doy[0] >= 18 & toa_doy[0] <= 22 )||(toa_dox[0] == 85 & toa_doy[0] >= 18 & toa_doy[0] <= 22 )
+	||(toa_doy[0] == 7  & toa_dox[0] >= 40 & toa_dox[0] <= 65 )||(toa_doy[0] == 18 & toa_dox[0] >= 40 & toa_dox[0] <= 65 )
+	||(toa_dox[0] == 40 & toa_doy[0] >= 7  & toa_doy[0] <= 11 )||(toa_dox[0] == 65 & toa_doy[0] >= 7  & toa_doy[0] <= 11 )
+	||(toa_dox[0] == 40 & toa_doy[0] >= 14 & toa_doy[0] <= 18 )||(toa_dox[0] == 65 & toa_doy[0] >= 14 & toa_doy[0] <= 18 )
+	||(toa_dox[0] == 53 & toa_doy[0] >= 9  & toa_doy[0] <= 16)){
+		return true;
+	}
+	return kt_ran_cham_than();
+}
 bool kt_ran_de_qua(){
 	for (int i = 0;i < sl;i++){
 		if (xqua == toa_dox[i] && yqua == toa_doy[i]){
@@ -151,11 +220,36 @@ bool kt_ran_de_qua(){
 	}
 	return false;
 }
-void tao_qua(){
+void tao_qua1(){
 	do{
-		xqua = rand() % (93 - 12 + 1) + 12; // (94 - 11 + 1) + 11
-		yqua = rand() % (24 - 2 + 1) + 2;   //	(25 - 1 + 1) + 1
+		xqua = rand() % (93 - 12 + 1) + 12; 
+		yqua = rand() % (24 - 2 + 1)  + 2;   
 	}while(kt_ran_de_qua());
+}
+void tao_qua2(){
+	do{
+		xqua = rand() % (93 - 12+ 1) + 12; 
+		yqua = rand() % (24 - 2 + 1) + 2;   
+	}	
+	while(kt_ran_de_qua() || (xqua == 10 || xqua == 95 ||yqua == 1||yqua == 25
+	|| ((xqua >= 30 & xqua <=  40 & yqua == 5  ) || (yqua >= 5  & yqua <= 10 & xqua == 30))
+	|| ((xqua >= 70 & xqua <=  80 & yqua == 5  ) || (yqua >= 5  & yqua <= 10 & xqua == 80))
+	|| ((xqua >= 30 & xqua <=  40 & yqua == 20 ) || (yqua >= 15 & yqua <= 20 & xqua == 30))
+	|| ((xqua >= 70 & xqua <=  80 & yqua == 20 ) || (yqua >= 15 & yqua <= 20 & xqua == 80))) );
+}
+void tao_qua3(){
+	do{
+		xqua = rand() % (93 - 12+ 1) + 12; 
+		yqua = rand() % (24 - 2 + 1) + 2;   
+	}	
+	while(kt_ran_de_qua() || (xqua == 10 || xqua == 95 ||yqua == 1||yqua == 25
+	||(toa_dox[0] >= 20 & toa_dox[0] <= 85 & toa_doy[0] == 5)  ||(toa_dox[0] >= 20 & toa_dox[0] <= 85 & toa_doy[0] == 20 )
+	||(toa_dox[0] == 20 & toa_doy[0] >= 3  & toa_doy[0] <= 7 ) ||(toa_dox[0] == 85 & toa_doy[0] >= 3  & toa_doy[0] <= 7 )
+	||(toa_dox[0] == 20 & toa_doy[0] >= 18 & toa_doy[0] <= 22 )||(toa_dox[0] == 85 & toa_doy[0] >= 18 & toa_doy[0] <= 22 )
+	||(toa_doy[0] == 7  & toa_dox[0] >= 40 & toa_dox[0] <= 65 )||(toa_doy[0] == 18 & toa_dox[0] >= 40 & toa_dox[0] <= 65 )
+	||(toa_dox[0] == 40 & toa_doy[0] >= 7  & toa_doy[0] <= 11 )||(toa_dox[0] == 65 & toa_doy[0] >= 7  & toa_doy[0] <= 11 )
+	||(toa_dox[0] == 40 & toa_doy[0] >= 14 & toa_doy[0] <= 18 )||(toa_dox[0] == 65 & toa_doy[0] >= 14 & toa_doy[0] <= 18 )
+	||(toa_dox[0] == 53 & toa_doy[0] >= 9  & toa_doy[0] <= 16 )));
 }
 void ve_qua(){
 	gotoXY(xqua, yqua);
@@ -165,21 +259,40 @@ void ve_qua(){
 bool kt_ran_an_qua(){
 	return (toa_dox[0] == xqua && toa_doy[0] == yqua);
 }
-void xu_ly_ran_an_qua(){
+void xu_ly_ran_an_qua1(){
 	if (kt_ran_an_qua()){
 		sl++;      //tang dot
-		speed-=1;
-		tao_qua(); //tao qua moi
+		speed-=8;
+		tao_qua1(); //tao qua moi
 		ve_qua();
 		score++;   //tang diem
 	}
 }
+void xu_ly_ran_an_qua2(){
+	if (kt_ran_an_qua()){
+		sl++;      //tang dot
+		speed-=5;
+		tao_qua2(); //tao qua moi
+		ve_qua();
+		score++;   //tang diem
+	}
+}
+void xu_ly_ran_an_qua3(){
+	if (kt_ran_an_qua()){
+		sl++;      //tang dot
+		speed-=1;
+		tao_qua3(); //tao qua moi
+		ve_qua();
+		score++;   //tang diem
+	}
+}
+
 void vaogame1(){
 	srand(time(NULL));
 	SetColor(7);
 	man1();
 	khoi_tao_ran();
-	tao_qua();
+	tao_qua1();
 	ve_qua();
 	int x = toa_dox[0];
 	int y = toa_doy[0];
@@ -233,9 +346,10 @@ void vaogame1(){
 					highest_record_score=score;
 				}
 			sl = 3; score=0;
+			speed=100;
 			break;
 		}
-		xu_ly_ran_an_qua();
+		xu_ly_ran_an_qua1();
 		di_chuyen_ran(x,y);
 		Sleep(speed); // toc do
 	}
@@ -247,7 +361,7 @@ void vaogame2(){
 	SetColor(7);
 	man2();
 	khoi_tao_ran();
-	tao_qua();
+	tao_qua2();
 	ve_qua();
 	int x = toa_dox[0];
 	int y = toa_doy[0];
@@ -301,15 +415,86 @@ void vaogame2(){
 					highest_record_score=score;
 				}
 			sl = 3; score=0;
+			speed=100;
 			break;
 		}
-		xu_ly_ran_an_qua();
+		xu_ly_ran_an_qua2();
 		di_chuyen_ran(x,y);
 		Sleep(speed); // toc do
 	}
 	gotoXY(28,13);
 	SetColor(7);
 }
+void vaogame3(){
+	srand(time(NULL));
+	SetColor(7);
+	man3();
+	khoi_tao_ran1();
+	tao_qua3();
+	ve_qua();
+	int x = toa_dox[0];
+	int y = toa_doy[0];
+	int check = 2;
+	while (true){
+		gotoXY(toa_dox[sl], toa_doy[sl]);
+		printf(" ");
+		//------ in ----
+		ve_ran();
+		//control snake
+		if (_kbhit()){
+			char c = _getch();
+			if (c == -32){
+				c = _getch();
+				if (c == 72 && check != 0){
+					check = 1;
+				}
+				else if (c == 80 && check != 1){
+					check = 0;
+				}
+				else if (c == 75 && check != 2){
+					check = 3;
+				}
+				else if (c == 77 && check != 3){
+					check = 2;
+				}
+			}
+		}
+		//------ di chuy?n ---
+		if (check == 0){
+			y++;
+		}
+		else if (check == 1){
+			y--;
+		}
+		else if (check == 2){
+			x++;
+		}
+		else if (check ==3){
+			x--;
+		}
+		gotoXY(100,2);
+		printf("SCORE : %d",score);
+		gotoXY(100,5);
+		printf("HIGHEST SCORE : %d",highest_record_score);
+		if (game_over3()){
+			gotoXY(48,12);
+			SetColor(13);
+			printf("YOUR SCORE : %d   \n",score);
+			if(score>highest_record_score){
+					highest_record_score=score;
+				}
+			sl = 3; score=0;
+			speed=100;
+			break;
+		}
+		xu_ly_ran_an_qua3();
+		di_chuyen_ran(x,y);
+		Sleep(speed); // toc do
+	}
+	gotoXY(28,13);
+	SetColor(7);
+}
+
 void menu(int luachoncu, int luachonmoi){
 	while(1){
 		if(dem!=0){
@@ -317,7 +502,7 @@ void menu(int luachoncu, int luachonmoi){
 		}
 		system("cls");
 		Nocursortype(); // ham an con tro chuot tren man hinh console
-		gotoXY(52,1);
+		gotoXY(55,1);
 		printf("SNAKE GAME");             
 		gotoXY(53,4);
 		printf("1. CHOI NGAY");
@@ -337,9 +522,9 @@ void menu(int luachoncu, int luachonmoi){
 			switch(luachoncu){ 
 				case 1: // vao game
 					system("cls");
-					vaogame1();
+					vaogame3();
 					gotoXY(40,14);
-					printf("Nhan 3 va Enter de quay lai menu : ");
+					printf("Nhan 5 va Enter de quay lai menu : ");
 					scanf("%d",&luachonmoi);
 					dem++;
 					break;
@@ -351,15 +536,17 @@ void menu(int luachoncu, int luachonmoi){
 					gotoXY(50,5);
 					printf(" Man 2 ");
 					gotoXY(50,6);
-					printf(" Nhan 3 va Enter de quay lai menu  : ");
-					gotoXY(50,8);
+					printf(" Man 3 ");
+					gotoXY(50,7);
+					printf(" Nhan 5 va Enter de quay lai menu  : ");
+					gotoXY(50,10);
 					printf("CHOICE : ");
 					scanf("%d",&luachonmoi);
 					if(luachonmoi==1){
 						system("cls");
 						vaogame1();
 						gotoXY(40,14);
-					    printf("Nhan 3 va Enter de quay lai menu : ");
+					    printf("Nhan 5 va Enter de quay lai menu : ");
 				 	    scanf("%d",&luachonmoi);
 					    dem++;
 					    break;	}
@@ -367,12 +554,21 @@ void menu(int luachoncu, int luachonmoi){
 						system("cls");
 						vaogame2();
 						gotoXY(40,14);
-					    printf("Nhan 3 va Enter de quay lai menu : ");
+					    printf("Nhan 5 va Enter de quay lai menu : ");
 					    scanf("%d",&luachonmoi);
 					    dem++;
 					    break;
 					}
 					if(luachonmoi==3){
+						system("cls");
+						vaogame3();
+						gotoXY(40,14);
+					    printf("Nhan 5 va Enter de quay lai menu : ");
+					    scanf("%d",&luachonmoi);
+					    dem++;
+					    break;
+					}
+					if(luachonmoi==5){
 						break;
 					}
 						
@@ -383,7 +579,7 @@ void menu(int luachoncu, int luachonmoi){
 					gotoXY(50,5);
 					printf(" Khi ran dung tuong , ban thua");
 					gotoXY(50,6);
-					printf(" Nhan 3 va Enter de quay lai menu");
+					printf(" Nhan 5 va Enter de quay lai menu");
 					gotoXY(50,8);
 					printf("CHOICE : ");
 					scanf("%d",&luachonmoi);
@@ -392,13 +588,13 @@ void menu(int luachoncu, int luachonmoi){
 						while(1){	
 							system("cls");
 							gotoXY(50,4);
-							printf("The snake is moving at a speed of %d",speed);
+							printf("D0 cham cua ran %d",speed);
 							gotoXY(50,5);
-							printf("Press 1 to increase the snake's speed by 10 ");
+							printf("Nhan 1 de tang toc do cua ran ");
 							gotoXY(50,6);
-							printf("Press 2 to decrease the snake's speed by 10 ");
+							printf("Nhan 2 de giam bot toc do cua ran ");
 							gotoXY(50,7);
-							printf("Press 3 and ENTER to return to the menu");
+							printf("Nhan 5 va Enter de quay lai menu");
 							gotoXY(50,9);
 							printf("CHOICE : ");
 							scanf("%d",&luachonmoi);
@@ -408,12 +604,12 @@ void menu(int luachoncu, int luachonmoi){
 							if(luachonmoi==2){
 								speed=speed+10;
 							}
-							if(luachonmoi==3)
+							if(luachonmoi==5)
 								break;
 						}	
 							break;
 			}
-			if(luachonmoi==3){
+			if(luachonmoi==5){
 				break;
 				SetColor(7);
 				menu(luachoncu,luachonmoi);
