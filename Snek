@@ -243,13 +243,13 @@ void tao_qua3(){
 		yqua = rand() % (24 - 2 + 1) + 2;   
 	}	
 	while(kt_ran_de_qua() || (xqua == 10 || xqua == 95 ||yqua == 1||yqua == 25
-	||(toa_dox[0] >= 20 & toa_dox[0] <= 85 & toa_doy[0] == 5)  ||(toa_dox[0] >= 20 & toa_dox[0] <= 85 & toa_doy[0] == 20 )
-	||(toa_dox[0] == 20 & toa_doy[0] >= 3  & toa_doy[0] <= 7 ) ||(toa_dox[0] == 85 & toa_doy[0] >= 3  & toa_doy[0] <= 7 )
-	||(toa_dox[0] == 20 & toa_doy[0] >= 18 & toa_doy[0] <= 22 )||(toa_dox[0] == 85 & toa_doy[0] >= 18 & toa_doy[0] <= 22 )
-	||(toa_doy[0] == 7  & toa_dox[0] >= 40 & toa_dox[0] <= 65 )||(toa_doy[0] == 18 & toa_dox[0] >= 40 & toa_dox[0] <= 65 )
-	||(toa_dox[0] == 40 & toa_doy[0] >= 7  & toa_doy[0] <= 11 )||(toa_dox[0] == 65 & toa_doy[0] >= 7  & toa_doy[0] <= 11 )
-	||(toa_dox[0] == 40 & toa_doy[0] >= 14 & toa_doy[0] <= 18 )||(toa_dox[0] == 65 & toa_doy[0] >= 14 & toa_doy[0] <= 18 )
-	||(toa_dox[0] == 53 & toa_doy[0] >= 9  & toa_doy[0] <= 16 )));
+	||(xqua >= 20 & xqua <= 85  &  yqua == 5)  ||(xqua >= 20 &  xqua <= 85 &  yqua == 20 )
+	||(xqua == 20 &  yqua >= 3  &  yqua <= 7 ) ||(xqua == 85 &  yqua >= 3  &  yqua <= 7 )
+	||(xqua == 20 &  yqua >= 18 &  yqua <= 22 )||(xqua == 85 &  yqua >= 18 &  yqua <= 22 )
+	||(yqua == 7  & xqua >= 40  &  xqua <= 65 )||(yqua == 18 &  xqua >= 40 &  xqua <= 65 )
+	||(xqua == 40 &  yqua >= 7  &  yqua <= 11 )||(xqua == 65 &  yqua >= 7  &  yqua <= 11 )
+	||(xqua == 40 &  yqua >= 14 &  yqua <= 18 )||(xqua == 65 &  yqua >= 14 &  yqua <= 18 )
+	||(xqua == 53 &  yqua >= 9  &  yqua <= 16 )));
 }
 void ve_qua(){
 	gotoXY(xqua, yqua);
